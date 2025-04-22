@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Signup</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+    <div class="container">
+    <form action="/user/signup" method="post" enctype="multipart/form-data" >
+        <div class="mb-3 mt-5">
+          <label for="fullname" class="form-label">Your Profile Picture</label>
+          <input type="file" class="form-control" name="profile_pic" id="profile_pic" aria-describedby="fullName">
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+            <label for="fullname" class="form-label">FullName</label>
+            <input type="text" class="form-control" name="fullname" id="fullname" aria-describedby="fullName">
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <%- include('./partials/scripts') %>
+
+</body>
+</html>

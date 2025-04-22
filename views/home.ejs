@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+    <div class="mt-5 d-flex justify-content-center">
+    <div class="row row-cols-1 row-cols-md-3 g-4 container">
+    <% blogs.forEach(element => { %>
+        <div class="col">
+          <div class="card">
+            <h4 class="card-title d-flex justify-content-center mt-4 mb-4"><%= element.title %></h4>
+            <img src=<%= element.coverImageURL%> class="card-img-top" alt="...">
+            <div class="card-body">
+              <pre class="card-text"><%= element.body %></pre>
+              <div class="container mt-4">
+                
+                <% if (locals.user) { %>
+                  <form action="blog/oneblog/<%= element._id %>" method="get">
+                    <button class="btn btn-sm btn-primary" >view</button>
+                  </form>
+                  <% } else { %>
+                    <form action="/user/signin" method="post">
+                      <button class="btn btn-sm btn-primary">view</button>
+                    </form>
+                  <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include('./partials/scripts') %>    
+
+</body>
+
+</html>
