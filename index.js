@@ -1,3 +1,4 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -6,17 +7,18 @@ const blogRoute = require("./routes/blog");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieparser = require("cookie-parser");
-const { chackForAuthenticationCookie } = require("./middlewares/authentication");
+const {
+  chackForAuthenticationCookie,
+} = require("./middlewares/authentication");
 
 const PORT = 8000;
-
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/blogapp";
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log("Mongoose connection successful"))
+  .catch(() => console.log("Mongoose connection error"));
 // ✅ CORS Middleware should come first!
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,10 +32,10 @@ app.use(express.static(path.resolve("./public")));
 app.use("/blog", blogRoute);
 app.use("/user", userRoute);
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/blogs")
-  .then(() => console.log("Mongoose connection successful"))
-  .catch(() => console.log("Mongoose connection error"));
+// mongoose
+//   .connect()
+//   .then(() => console.log("Mongoose connection successful"))
+//   .catch(() => console.log("Mongoose connection error"));
 
 app.get("/", async (req, res) => {
   try {
