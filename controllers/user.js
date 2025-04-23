@@ -15,15 +15,11 @@ async function uploadImage(url) {
             public_id: 'blog-image',
         });
 
-        console.log(uploadResult);
-
         // Optimize delivery by resizing and applying auto-format and auto-quality
         const optimizeUrl = cloudinary.url('blog-image', {
             fetch_format: 'auto',
             quality: 'auto'
         });
-
-        console.log(optimizeUrl);
 
         // Transform the image: auto-crop to square aspect ratio
         const autoCropUrl = cloudinary.url('blog-image', {
@@ -32,8 +28,6 @@ async function uploadImage(url) {
             width: 500,
             height: 500,
         });
-
-        console.log(autoCropUrl);
         
         return { uploadResult, optimizeUrl, autoCropUrl };
     } catch (error) {

@@ -42,7 +42,6 @@ router.get("/allBlog", async (req, res) => {
 router.post("/addblog", async (req, res) => {
   try {
     const { title, body, coverImageURL, createdBy } = req.body;
-    console.log("req.body : ", req.body);
 
     const blog = new Blog({
       body,
@@ -65,7 +64,6 @@ router.delete("/deleteBlog/:blogId", async (req, res) => {
   try {
     const { blogId } = req.params;
     const blog = await Blog.findOneAndDelete({ _id: blogId });
-    console.log("blog", blog);
     if (!blog) {
       return res.status(404).json({ error: "Blog not found" });
     }

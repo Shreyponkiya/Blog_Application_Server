@@ -78,7 +78,6 @@ router.post("/signup", async (req, res) => {
     if (!fullname || !email || !password || !profileImage) {
       return res.status(400).json({ error: "All fields are required" });
     }
-    console.log("profileImage", profileImage);
 
     const user = await User.create({
       fullname,

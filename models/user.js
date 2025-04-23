@@ -68,8 +68,6 @@ Schema.static('matchPasswordAndGenerateToken',async function(email,password){
     const userhashedPassword = createHmac('sha256',salt)
     .update(password)
     .digest('hex')
-    console.log(hashedPassword)
-    console.log(userhashedPassword)
     if(hashedPassword !== userhashedPassword){
         throw new Error("incorrect password");
     }
